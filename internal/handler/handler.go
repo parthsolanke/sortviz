@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
+	"os"
 
 	"github.com/parthsolanke/SortViz/internal/sorter"
 )
@@ -20,6 +21,18 @@ func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "web/templates/about.html")
 }
 
+func AngularHandler(w http.ResponseWriter, r *http.Request) {
+	servePage(w, "web/templates/angular.html")
+}
+
+func AngularAlgorithmsHandler(w http.ResponseWriter, r *http.Request) {
+	servePage(w, "web/templates/angular_algorithms.html")
+}
+
+func AngularAboutHandler(w http.ResponseWriter, r *http.Request) {
+	servePage(w, "web/templates/angular_about.html")
+}
+
 func renderTemplate(w http.ResponseWriter, path string) {
 	tmpl, err := template.ParseFiles(path)
 	if err != nil {
@@ -27,6 +40,19 @@ func renderTemplate(w http.ResponseWriter, path string) {
 		return
 	}
 	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, "Could not render page", http.StatusInternalServerError)
+	}
+}
+
+func servePage(w http.ResponseWriter, path string) {
+	page, err := os.ReadFile(path)
+	if err != nil {
+		http.Error(w, "Could not load page", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	if _, err := w.Write(page); err != nil {
 		http.Error(w, "Could not render page", http.StatusInternalServerError)
 	}
 }

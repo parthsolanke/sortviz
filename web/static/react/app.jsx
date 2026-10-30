@@ -15,6 +15,7 @@ const NAV_LINKS = [
     { key: "visualizer", href: "/", label: "Visualizer" },
     { key: "algorithms", href: "/algorithms", label: "Algorithms" },
     { key: "about", href: "/about", label: "About" },
+    { key: "angular", href: "/angular", label: "Angular" },
 ];
 
 function Nav() {

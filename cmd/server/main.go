@@ -16,6 +16,9 @@ func main() {
 	router.HandleFunc("/", handler.IndexHandler)
 	router.HandleFunc("/algorithms", handler.AlgorithmsHandler)
 	router.HandleFunc("/about", handler.AboutHandler)
+	router.HandleFunc("/angular", handler.AngularHandler)
+	router.HandleFunc("/angular/algorithms", handler.AngularAlgorithmsHandler)
+	router.HandleFunc("/angular/about", handler.AngularAboutHandler)
 	router.HandleFunc("POST /sort", handler.SortHandler)
 
 	log.Println("Server started at http://127.0.0.1:8080/")
