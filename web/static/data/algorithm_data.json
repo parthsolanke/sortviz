@@ -26,5 +26,9 @@
     "shell": {
         "complexity": "Best Case O(n log n), Average Case O(n^(3/2)), Worst Case O(n^2)",
         "code": "void shellSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    for (int gap = n / 2; gap > 0; gap /= 2) { {{NEWLINE}}        for (int i = gap; i < n; i++) { {{NEWLINE}}            int temp = arr[i];{{NEWLINE}}            int j = i;{{NEWLINE}}            while (j >= gap && arr[j - gap] > temp) { {{NEWLINE}}                arr[j] = arr[j - gap];{{NEWLINE}}                j -= gap;{{NEWLINE}}            }{{NEWLINE}}            arr[j] = temp;{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "cocktail": {
+        "complexity": "Best Case O(n), Average Case O(n^2), Worst Case O(n^2)",
+        "code": "void cocktailSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    int start = 0;{{NEWLINE}}    int end = n - 1;{{NEWLINE}}    bool swapped = true;{{NEWLINE}}{{NEWLINE}}    while (swapped) { {{NEWLINE}}        swapped = false;{{NEWLINE}}        for (int i = start; i < end; i++) { {{NEWLINE}}            if (arr[i] > arr[i + 1]) { {{NEWLINE}}                swap(arr[i], arr[i + 1]);{{NEWLINE}}                swapped = true;{{NEWLINE}}            }{{NEWLINE}}        }{{NEWLINE}}        if (!swapped) break;{{NEWLINE}}{{NEWLINE}}        swapped = false;{{NEWLINE}}        end--;{{NEWLINE}}{{NEWLINE}}        for (int i = end; i > start; i--) { {{NEWLINE}}            if (arr[i - 1] > arr[i]) { {{NEWLINE}}                swap(arr[i - 1], arr[i]);{{NEWLINE}}                swapped = true;{{NEWLINE}}            }{{NEWLINE}}        }{{NEWLINE}}        start++;{{NEWLINE}}    }{{NEWLINE}}}"
     }
 }

@@ -100,6 +100,43 @@ func ShellSort(arr []int) []SortStep {
 	return steps
 }
 
+func CocktailSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	start := 0
+	end := n - 1
+
+	for start < end {
+		swapped := false
+
+		for i := start; i < end; i++ {
+			if arr[i] > arr[i+1] {
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+				swapped = true
+			}
+		}
+		steps = appendStep(steps, arr)
+
+		end--
+
+		for i := end; i > start; i-- {
+			if arr[i-1] > arr[i] {
+				arr[i-1], arr[i] = arr[i], arr[i-1]
+				swapped = true
+			}
+		}
+		steps = appendStep(steps, arr)
+
+		start++
+
+		if !swapped {
+			break
+		}
+	}
+
+	return steps
+}
+
 func HeapSort(arr []int) []SortStep {
 	var steps []SortStep
 	n := len(arr)
