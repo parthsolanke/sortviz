@@ -9,8 +9,26 @@ import (
 )
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles("web/templates/index.html"))
-	tmpl.Execute(w, nil)
+	renderTemplate(w, "web/templates/index.html")
+}
+
+func AlgorithmsHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "web/templates/algorithms.html")
+}
+
+func AboutHandler(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "web/templates/about.html")
+}
+
+func renderTemplate(w http.ResponseWriter, path string) {
+	tmpl, err := template.ParseFiles(path)
+	if err != nil {
+		http.Error(w, "Could not load page", http.StatusInternalServerError)
+		return
+	}
+	if err := tmpl.Execute(w, nil); err != nil {
+		http.Error(w, "Could not render page", http.StatusInternalServerError)
+	}
 }
 
 func SortHandler(w http.ResponseWriter, r *http.Request) {

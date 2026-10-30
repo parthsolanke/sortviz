@@ -199,3 +199,144 @@ pre {
     overflow-y: auto;
     text-align: left;
 }
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background-color: #112240;
+    border-bottom: 1px solid #1e3a8a;
+}
+
+.site-nav .brand {
+    color: #60a5fa;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #bfdbfe;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.status-text {
+    min-height: 24px;
+    margin-top: 16px;
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+.vis-caption {
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+.page-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+    text-align: left;
+}
+
+.page-content h1 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.page-lead {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    color: #bfdbfe;
+    text-align: center;
+}
+
+.algorithm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.algorithm-card {
+    background-color: #112240;
+    border: 1px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 18px;
+    text-align: left;
+}
+
+.algorithm-card h2 {
+    margin: 0 0 8px;
+    color: #60a5fa;
+}
+
+.algorithm-card .complexity {
+    margin: 0 0 12px;
+    color: #bfdbfe;
+    font-size: 14px;
+}
+
+.algorithm-card pre {
+    max-height: 240px;
+    overflow: auto;
+}
+
+.about-card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #112240;
+    border: 1px solid #1e3a8a;
+    border-radius: 8px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.text-link {
+    color: #60a5fa;
+}
+
+.text-link:hover {
+    color: #93c5fd;
+}
+
+.error-text {
+    color: #f87171;
+    text-align: center;
+}
+
+.loading-text {
+    color: #93c5fd;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: auto;
+    }
+
+    #visualizer {
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto;
+    }
+}
