@@ -18,5 +18,9 @@
     "quick": {
         "complexity": "Best & Average Case O(n log n), Worst Case O(n^2)",
         "code": "int partition(vector<int>& arr, int low, int high) { {{NEWLINE}}    int pivot = arr[high];{{NEWLINE}}    int i = low - 1;{{NEWLINE}}    for (int j = low; j < high; j++) { {{NEWLINE}}        if (arr[j] < pivot) { {{NEWLINE}}            i++;{{NEWLINE}}            swap(arr[i], arr[j]);{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}    swap(arr[i + 1], arr[high]);{{NEWLINE}}    return i + 1;{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void quickSort(vector<int>& arr, int low = 0, int high = -1) { {{NEWLINE}}    if (high == -1) high = arr.size() - 1;{{NEWLINE}}    if (low < high) { {{NEWLINE}}        int pi = partition(arr, low, high);{{NEWLINE}}        quickSort(arr, low, pi - 1);{{NEWLINE}}        quickSort(arr, pi + 1, high);{{NEWLINE}}    }{{NEWLINE}}}"
-    }   
+    },
+    "heap": {
+        "complexity": "Best & Average Case O(n log n), Worst Case O(n log n)",
+        "code": "void heapify(vector<int>& arr, int n, int i) { {{NEWLINE}}    int largest = i;{{NEWLINE}}    int left = 2 * i + 1;{{NEWLINE}}    int right = 2 * i + 2;{{NEWLINE}}{{NEWLINE}}    if (left < n && arr[left] > arr[largest]){{NEWLINE}}        largest = left;{{NEWLINE}}    if (right < n && arr[right] > arr[largest]){{NEWLINE}}        largest = right;{{NEWLINE}}{{NEWLINE}}    if (largest != i) { {{NEWLINE}}        swap(arr[i], arr[largest]);{{NEWLINE}}        heapify(arr, n, largest);{{NEWLINE}}    }{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void heapSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    for (int i = n / 2 - 1; i >= 0; i--){{NEWLINE}}        heapify(arr, n, i);{{NEWLINE}}{{NEWLINE}}    for (int i = n - 1; i > 0; i--) { {{NEWLINE}}        swap(arr[0], arr[i]);{{NEWLINE}}        heapify(arr, i, 0);{{NEWLINE}}    }{{NEWLINE}}}"
+    }
 }
