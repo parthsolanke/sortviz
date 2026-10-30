@@ -1,5 +1,7 @@
 # ![Icon](./web/static/assets/favicon.ico) SortViz
 
+A Go web app that visualizes selection, bubble, insertion, merge, and quick sort step by step.
+
 SortViz is an overkill web application that visualizes sorting algorithms. Built with Go.
 
 ![SortViz Screenshot](./web/static/assets/app.png)
