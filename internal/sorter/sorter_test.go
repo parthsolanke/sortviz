@@ -65,6 +65,18 @@ func TestHeapSort(t *testing.T) {
 	}
 }
 
+func TestShellSort(t *testing.T) {
+	arr := []int{5, 3, 8, 4, 2}
+	expected := []int{2, 3, 4, 5, 8}
+
+	steps := ShellSort(arr)
+	result := steps[len(steps)-1].Array
+
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v, got %v", expected, result)
+	}
+}
+
 func TestQuickSort(t *testing.T) {
 	arr := []int{5, 3, 8, 4, 2}
 	expected := []int{2, 3, 4, 5, 8}

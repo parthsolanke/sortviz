@@ -79,6 +79,27 @@ func QuickSort(arr []int) []SortStep {
 	return steps
 }
 
+func ShellSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for gap := n / 2; gap > 0; gap /= 2 {
+		for i := gap; i < n; i++ {
+			temp := arr[i]
+			j := i
+			for j >= gap && arr[j-gap] > temp {
+				arr[j] = arr[j-gap]
+				j -= gap
+			}
+			arr[j] = temp
+		}
+
+		steps = appendStep(steps, arr)
+	}
+
+	return steps
+}
+
 func HeapSort(arr []int) []SortStep {
 	var steps []SortStep
 	n := len(arr)

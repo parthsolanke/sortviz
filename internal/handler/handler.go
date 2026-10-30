@@ -40,6 +40,8 @@ func SortHandler(w http.ResponseWriter, r *http.Request) {
 		steps = sorter.QuickSort(data.Array)
 	case "heap":
 		steps = sorter.HeapSort(data.Array)
+	case "shell":
+		steps = sorter.ShellSort(data.Array)
 	default:
 		http.Error(w, "Unknown sorting algorithm", http.StatusBadRequest)
 		return
