@@ -78,3 +78,78 @@ func QuickSort(arr []int) []SortStep {
 	quickSortHelper(arr, 0, len(arr)-1, &steps)
 	return steps
 }
+
+func ShellSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for gap := n / 2; gap > 0; gap /= 2 {
+		for i := gap; i < n; i++ {
+			temp := arr[i]
+			j := i
+			for j >= gap && arr[j-gap] > temp {
+				arr[j] = arr[j-gap]
+				j -= gap
+			}
+			arr[j] = temp
+		}
+
+		steps = appendStep(steps, arr)
+	}
+
+	return steps
+}
+
+func CocktailSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	start := 0
+	end := n - 1
+
+	for start < end {
+		swapped := false
+
+		for i := start; i < end; i++ {
+			if arr[i] > arr[i+1] {
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+				swapped = true
+			}
+		}
+		steps = appendStep(steps, arr)
+
+		end--
+
+		for i := end; i > start; i-- {
+			if arr[i-1] > arr[i] {
+				arr[i-1], arr[i] = arr[i], arr[i-1]
+				swapped = true
+			}
+		}
+		steps = appendStep(steps, arr)
+
+		start++
+
+		if !swapped {
+			break
+		}
+	}
+
+	return steps
+}
+
+func HeapSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for i := n/2 - 1; i >= 0; i-- {
+		heapify(arr, n, i, &steps)
+	}
+
+	for i := n - 1; i > 0; i-- {
+		arr[0], arr[i] = arr[i], arr[0]
+		steps = appendStep(steps, arr)
+		heapify(arr, i, 0, &steps)
+	}
+
+	return steps
+}

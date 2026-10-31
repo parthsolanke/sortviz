@@ -6,8 +6,8 @@ html {
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #121212;
-    color: #ffffff;
+    background-color: #0a192f;
+    color: #dbeafe;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,7 +15,7 @@ body {
 
 h1 {
     margin-top: 50px;
-    color: #ffffff;
+    color: #60a5fa;
     text-align: center;
     font-size: 28px;
     margin-bottom: 20px;
@@ -24,7 +24,7 @@ h1 {
 button {
     padding: 12px 24px;
     font-size: 18px;
-    background-color: #28a745;
+    background-color: #2563eb;
     color: white;
     border: none;
     cursor: pointer;
@@ -33,20 +33,20 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #1d4ed8;
 }
 
 .bar {
     width: 20px;
     margin: 1px;
-    background-color: #007BFF;
+    background-color: #3b82f6;
     transition: height 0.5s, transform 0.5s ease-in-out;
     border-radius: 2px;
     width : calc(100% / 40);
     font-size: 0.7rem;
     text-Align :center;
     font-Weight : bold;
-    color: #1e1e1e
+    color: #0a192f
 }
 
 .container {
@@ -56,9 +56,9 @@ button:hover {
 
 .sidebar {
     width: 250px;
-    background-color: #262626;
+    background-color: #112240;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
@@ -67,7 +67,7 @@ h2 {
 }
 
 .control-button {
-    background-color: #4CAF50;
+    background-color: #2563eb;
     color: white;
     border: none;
     padding: 15px 20px;
@@ -83,7 +83,7 @@ h2 {
 }
 
 .control-button:hover {
-    background-color: #45a049;
+    background-color: #1d4ed8;
 }
 
 .speed-control,
@@ -108,8 +108,8 @@ h2 {
     font-size: 16px;
     border-radius: 5px;
     border: none;
-    background-color: #1f1f1f;
-    color: #eee;
+    background-color: #0a192f;
+    color: #bfdbfe;
     appearance: none;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -117,8 +117,8 @@ h2 {
 }
 
 .algorithm-select select option {
-    background-color: #1f1f1f;
-    color: #eee;
+    background-color: #0a192f;
+    color: #bfdbfe;
     text-align: center;
 }
 
@@ -134,8 +134,8 @@ h2 {
     align-items: flex-end;
     height: 400px;
     width: 800px;
-    border: 5px solid #333;
-    background-color: #1e1e1e;
+    border: 5px solid #2563eb;
+    background-color: #0a192f;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     overflow: hidden;
@@ -155,13 +155,13 @@ h2 {
 }
 
 .popup-content {
-    background: #262626;
+    background: #112240;
     padding: 20px;
     border-radius: 8px;
     width: 80%;
     max-width: 600px;
     position: relative;
-    color: #ffffff;
+    color: #dbeafe;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     overflow: auto;
     text-align: left;
@@ -169,7 +169,7 @@ h2 {
 
 .close-btn {
     font-size: 18px;
-    color: #ffffff;
+    color: #bfdbfe;
     cursor: pointer;
     position: absolute;
     top: 10px;
@@ -179,8 +179,8 @@ h2 {
 }
 
 pre, code {
-    background-color: #1e1e1e;
-    color: #28a745;
+    background-color: #0a192f;
+    color: #60a5fa;
     padding: 10px;
     border-radius: 5px;
     overflow-x: auto;
@@ -192,10 +192,151 @@ pre, code {
 
 pre {
     margin-top: 10px;
-    border: 1px solid #444;
+    border: 1px solid #2563eb;
     padding: 15px;
     line-height: 1.5;
     max-height: 400px;
     overflow-y: auto;
     text-align: left;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background-color: #112240;
+    border-bottom: 1px solid #1e3a8a;
+}
+
+.site-nav .brand {
+    color: #60a5fa;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #bfdbfe;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.status-text {
+    min-height: 24px;
+    margin-top: 16px;
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+.vis-caption {
+    color: #93c5fd;
+    font-size: 14px;
+}
+
+.page-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+    text-align: left;
+}
+
+.page-content h1 {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.page-lead {
+    max-width: 720px;
+    margin: 0 auto 30px;
+    color: #bfdbfe;
+    text-align: center;
+}
+
+.algorithm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.algorithm-card {
+    background-color: #112240;
+    border: 1px solid #1e3a8a;
+    border-radius: 8px;
+    padding: 18px;
+    text-align: left;
+}
+
+.algorithm-card h2 {
+    margin: 0 0 8px;
+    color: #60a5fa;
+}
+
+.algorithm-card .complexity {
+    margin: 0 0 12px;
+    color: #bfdbfe;
+    font-size: 14px;
+}
+
+.algorithm-card pre {
+    max-height: 240px;
+    overflow: auto;
+}
+
+.about-card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #112240;
+    border: 1px solid #1e3a8a;
+    border-radius: 8px;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.text-link {
+    color: #60a5fa;
+}
+
+.text-link:hover {
+    color: #93c5fd;
+}
+
+.error-text {
+    color: #f87171;
+    text-align: center;
+}
+
+.loading-text {
+    color: #93c5fd;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: auto;
+    }
+
+    #visualizer {
+        width: 100%;
+        max-width: 800px;
+        margin: 30px auto;
+    }
 }

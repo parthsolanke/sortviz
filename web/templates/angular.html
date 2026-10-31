@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sortvizApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SortViz - Angular Visualizer</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="/static/angular/app.js"></script>
+</head>
+<body ng-controller="VisualizerController">
+    <sortviz-nav page="visualizer"></sortviz-nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>⚙️ Controls</h2>
+
+            <div class="algorithm-select">
+                <select ng-model="algorithm" aria-label="Sorting algorithm" ng-change="onAlgorithmChange()">
+                    <option ng-repeat="item in algorithms" ng-value="item.value">{{item.label}}</option>
+                </select>
+            </div>
+
+            <button class="control-button" ng-click="togglePlay()">
+                <i class="fas" ng-class="playing ? 'fa-pause' : 'fa-play'"></i>
+                {{playing ? 'Stop' : 'Start'}}
+            </button>
+
+            <button class="control-button" ng-click="shuffle()">
+                <i class="fas fa-random"></i> Shuffle
+            </button>
+
+            <div class="speed-control">
+                <label for="speed">
+                    <i class="fa-solid fa-gauge"></i> Speed:
+                </label>
+                <input id="speed" type="range" min="2" max="11" ng-model="speedValue">
+            </div>
+
+            <button class="control-button" ng-click="showComplexity()">
+                <i class="fa-solid fa-chart-line"></i> Complexity
+            </button>
+
+            <button class="control-button" ng-click="showCode()">
+                <i class="fa-solid fa-code"></i> Code
+            </button>
+
+            <p class="status-text" role="status">{{status}}</p>
+        </aside>
+
+        <main class="main-content">
+            <h1>🔮SortViz</h1>
+            <div id="visualizer" aria-label="Sorting visualization">
+                <div class="bar" ng-repeat="value in displayBars() track by $index" ng-style="barHeight(value)">{{value}}</div>
+            </div>
+            <p class="vis-caption">
+                Step {{steps ? (stepIndex + 1) : 0}} of {{steps ? steps.length : 0}}
+            </p>
+        </main>
+    </div>
+
+    <div class="popup" ng-if="modal" ng-click="closeModal()">
+        <div class="popup-content" ng-click="$event.stopPropagation()">
+            <button class="close-btn" ng-click="closeModal()" aria-label="Close">×</button>
+            <h3>{{modal.title}}</h3>
+            <pre ng-if="modal.code">{{modal.code}}</pre>
+            <p ng-if="!modal.code">{{modal.text}}</p>
+        </div>
+    </div>
+</body>
+</html>

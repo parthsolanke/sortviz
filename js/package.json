@@ -1,0 +1,10 @@
+{
+  "name": "sortviz",
+  "version": "0.1.0",
+  "description": "JavaScript port of the SortViz sorting algorithms",
+  "type": "module",
+  "main": "sortviz/index.js",
+  "scripts": {
+    "test": "node --test"
+  }
+}

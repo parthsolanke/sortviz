@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sortvizApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SortViz - Angular Algorithms</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="/static/angular/app.js"></script>
+</head>
+<body ng-controller="AlgorithmsController">
+    <sortviz-nav page="algorithms"></sortviz-nav>
+
+    <main class="page-content">
+        <h1>Sorting Algorithms</h1>
+        <p class="page-lead">
+            Compare the complexity and reference implementation of every algorithm
+            available in the visualizer.
+        </p>
+
+        <p class="error-text" ng-if="error">{{error}}</p>
+        <p class="loading-text" ng-if="!data && !error">Loading algorithms…</p>
+
+        <div class="algorithm-grid" ng-if="data">
+            <article class="algorithm-card" ng-repeat="item in algorithms">
+                <h2>{{item.label}}</h2>
+                <p class="complexity">
+                    {{data[item.value] ? data[item.value].complexity : 'Complexity unavailable'}}
+                </p>
+                <pre ng-if="data[item.value]">{{code(data[item.value])}}</pre>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
