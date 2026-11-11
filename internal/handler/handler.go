@@ -38,6 +38,38 @@ func SortHandler(w http.ResponseWriter, r *http.Request) {
 		steps = sorter.MergeSort(data.Array)
 	case "quick":
 		steps = sorter.QuickSort(data.Array)
+	case "heap":
+		steps = sorter.HeapSort(data.Array)
+	case "shell":
+		steps = sorter.ShellSort(data.Array)
+	case "cocktail":
+		steps = sorter.CocktailSort(data.Array)
+	case "gnome":
+		steps = sorter.GnomeSort(data.Array)
+	case "counting":
+		steps = sorter.CountingSort(data.Array)
+	case "comb":
+		steps = sorter.CombSort(data.Array)
+	case "oddeven":
+		steps = sorter.OddEvenSort(data.Array)
+	case "radix":
+		steps = sorter.RadixSort(data.Array)
+	case "bucket":
+		steps = sorter.BucketSort(data.Array)
+	case "pancake":
+		steps = sorter.PancakeSort(data.Array)
+	case "stooge":
+		steps = sorter.StoogeSort(data.Array)
+	case "tim":
+		steps = sorter.TimSort(data.Array)
+	case "pigeonhole":
+		steps = sorter.PigeonholeSort(data.Array)
+	case "cycle":
+		steps = sorter.CycleSort(data.Array)
+	case "bitonic":
+		steps = sorter.BitonicSort(data.Array)
+	case "tree":
+		steps = sorter.TreeSort(data.Array)
 	default:
 		http.Error(w, "Unknown sorting algorithm", http.StatusBadRequest)
 		return
