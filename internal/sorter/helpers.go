@@ -77,3 +77,22 @@ func quickSortHelper(arr []int, low, high int, steps *[]SortStep) {
 		quickSortHelper(arr, pi+1, high, steps)
 	}
 }
+
+func heapify(arr []int, n, i int, steps *[]SortStep) {
+	largest := i
+	left := 2*i + 1
+	right := 2*i + 2
+
+	if left < n && arr[left] > arr[largest] {
+		largest = left
+	}
+	if right < n && arr[right] > arr[largest] {
+		largest = right
+	}
+
+	if largest != i {
+		arr[i], arr[largest] = arr[largest], arr[i]
+		*steps = appendStep(*steps, arr)
+		heapify(arr, n, largest, steps)
+	}
+}
