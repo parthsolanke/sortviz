@@ -48,6 +48,14 @@ func SortHandler(w http.ResponseWriter, r *http.Request) {
 		steps = sorter.GnomeSort(data.Array)
 	case "counting":
 		steps = sorter.CountingSort(data.Array)
+	case "comb":
+		steps = sorter.CombSort(data.Array)
+	case "oddeven":
+		steps = sorter.OddEvenSort(data.Array)
+	case "radix":
+		steps = sorter.RadixSort(data.Array)
+	case "bucket":
+		steps = sorter.BucketSort(data.Array)
 	default:
 		http.Error(w, "Unknown sorting algorithm", http.StatusBadRequest)
 		return

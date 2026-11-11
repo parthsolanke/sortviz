@@ -38,5 +38,21 @@
     "counting": {
         "complexity": "Best & Average & Worst Case O(n + k)",
         "code": "void countingSort(vector<int>& arr) { {{NEWLINE}}    if (arr.empty()) return;{{NEWLINE}}    int minVal = *min_element(arr.begin(), arr.end());{{NEWLINE}}    int maxVal = *max_element(arr.begin(), arr.end());{{NEWLINE}}    vector<int> count(maxVal - minVal + 1, 0);{{NEWLINE}}    for (int v : arr) count[v - minVal]++;{{NEWLINE}}    int idx = 0;{{NEWLINE}}    for (int v = minVal; v <= maxVal; v++) { {{NEWLINE}}        while (count[v - minVal]-- > 0) arr[idx++] = v;{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "comb": {
+        "complexity": "Best Case O(n log n), Worst Case O(n^2)",
+        "code": "void combSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    int gap = n;{{NEWLINE}}    bool swapped = true;{{NEWLINE}}    while (gap > 1 || swapped) { {{NEWLINE}}        gap = max(1, gap * 10 / 13);{{NEWLINE}}        swapped = false;{{NEWLINE}}        for (int i = 0; i + gap < n; i++) { {{NEWLINE}}            if (arr[i] > arr[i + gap]) { {{NEWLINE}}                swap(arr[i], arr[i + gap]);{{NEWLINE}}                swapped = true;{{NEWLINE}}            }{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "oddeven": {
+        "complexity": "Worst Case O(n^2)",
+        "code": "void oddEvenSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    bool sorted = false;{{NEWLINE}}    while (!sorted) { {{NEWLINE}}        sorted = true;{{NEWLINE}}        for (int i = 1; i < n - 1; i += 2) { {{NEWLINE}}            if (arr[i] > arr[i + 1]) { {{NEWLINE}}                swap(arr[i], arr[i + 1]);{{NEWLINE}}                sorted = false;{{NEWLINE}}            }{{NEWLINE}}        }{{NEWLINE}}        for (int i = 0; i < n - 1; i += 2) { {{NEWLINE}}            if (arr[i] > arr[i + 1]) { {{NEWLINE}}                swap(arr[i], arr[i + 1]);{{NEWLINE}}                sorted = false;{{NEWLINE}}            }{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "radix": {
+        "complexity": "Best & Average & Worst Case O(d * (n + b))",
+        "code": "void radixSort(vector<int>& arr) { {{NEWLINE}}    if (arr.empty()) return;{{NEWLINE}}    int minVal = *min_element(arr.begin(), arr.end());{{NEWLINE}}    vector<int> work(arr.size());{{NEWLINE}}    for (int i = 0; i < arr.size(); i++) work[i] = arr[i] - minVal;{{NEWLINE}}    int maxVal = *max_element(work.begin(), work.end());{{NEWLINE}}    vector<int> buffer(arr.size());{{NEWLINE}}    for (int exp = 1; maxVal / exp > 0; exp *= 10) { {{NEWLINE}}        vector<int> count(10, 0);{{NEWLINE}}        for (int v : work) count[(v / exp) % 10]++;{{NEWLINE}}        for (int i = 1; i < 10; i++) count[i] += count[i - 1];{{NEWLINE}}        for (int i = work.size() - 1; i >= 0; i--) { {{NEWLINE}}            int digit = (work[i] / exp) % 10;{{NEWLINE}}            buffer[--count[digit]] = work[i];{{NEWLINE}}        }{{NEWLINE}}        work = buffer;{{NEWLINE}}    }{{NEWLINE}}    for (int i = 0; i < arr.size(); i++) arr[i] = work[i] + minVal;{{NEWLINE}}}"
+    },
+    "bucket": {
+        "complexity": "Best & Average Case O(n + k), Worst Case O(n^2)",
+        "code": "void bucketSort(vector<int>& arr) { {{NEWLINE}}    if (arr.empty()) return;{{NEWLINE}}    int minVal = *min_element(arr.begin(), arr.end());{{NEWLINE}}    int maxVal = *max_element(arr.begin(), arr.end());{{NEWLINE}}    int n = arr.size();{{NEWLINE}}    int span = maxVal - minVal + 1;{{NEWLINE}}    vector<vector<int>> buckets(n);{{NEWLINE}}    for (int v : arr) { {{NEWLINE}}        int idx = (v - minVal) * n / span;{{NEWLINE}}        if (idx >= n) idx = n - 1;{{NEWLINE}}        buckets[idx].push_back(v);{{NEWLINE}}    }{{NEWLINE}}    int k = 0;{{NEWLINE}}    for (auto& bucket : buckets) { {{NEWLINE}}        sort(bucket.begin(), bucket.end());{{NEWLINE}}        for (int v : bucket) arr[k++] = v;{{NEWLINE}}    }{{NEWLINE}}}"
     }
 }

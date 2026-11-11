@@ -172,6 +172,170 @@ func GnomeSort(arr []int) []SortStep {
 	return steps
 }
 
+func CombSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	gap := n
+	swapped := true
+
+	for gap > 1 || swapped {
+		gap = gap * 10 / 13
+		if gap < 1 {
+			gap = 1
+		}
+
+		swapped = false
+		for i := 0; i+gap < n; i++ {
+			if arr[i] > arr[i+gap] {
+				arr[i], arr[i+gap] = arr[i+gap], arr[i]
+				swapped = true
+			}
+		}
+
+		if swapped {
+			steps = appendStep(steps, arr)
+		}
+	}
+
+	return steps
+}
+
+func OddEvenSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	sorted := false
+
+	for !sorted {
+		sorted = true
+
+		for i := 1; i < n-1; i += 2 {
+			if arr[i] > arr[i+1] {
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+				sorted = false
+			}
+		}
+
+		for i := 0; i < n-1; i += 2 {
+			if arr[i] > arr[i+1] {
+				arr[i], arr[i+1] = arr[i+1], arr[i]
+				sorted = false
+			}
+		}
+
+		steps = appendStep(steps, arr)
+	}
+
+	return steps
+}
+
+func RadixSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	if n == 0 {
+		return steps
+	}
+
+	minVal := arr[0]
+	for _, v := range arr {
+		if v < minVal {
+			minVal = v
+		}
+	}
+
+	work := make([]int, n)
+	for i, v := range arr {
+		work[i] = v - minVal
+	}
+
+	maxVal := work[0]
+	for _, v := range work {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
+	buffer := make([]int, n)
+	for exp := 1; maxVal/exp > 0; exp *= 10 {
+		counts := make([]int, 10)
+		for _, v := range work {
+			counts[(v/exp)%10]++
+		}
+		for i := 1; i < 10; i++ {
+			counts[i] += counts[i-1]
+		}
+
+		for i := n - 1; i >= 0; i-- {
+			digit := (work[i] / exp) % 10
+			counts[digit]--
+			buffer[counts[digit]] = work[i]
+		}
+		copy(work, buffer)
+
+		for i := range arr {
+			arr[i] = work[i] + minVal
+		}
+		steps = appendStep(steps, arr)
+	}
+
+	return steps
+}
+
+func BucketSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	if n == 0 {
+		return steps
+	}
+
+	minVal, maxVal := arr[0], arr[0]
+	for _, v := range arr {
+		if v < minVal {
+			minVal = v
+		}
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
+	bucketCount := n
+	if maxVal == minVal {
+		bucketCount = 1
+	}
+
+	buckets := make([][]int, bucketCount)
+	span := maxVal - minVal + 1
+	for _, v := range arr {
+		idx := (v - minVal) * bucketCount / span
+		if idx >= bucketCount {
+			idx = bucketCount - 1
+		}
+		buckets[idx] = append(buckets[idx], v)
+	}
+
+	for _, bucket := range buckets {
+		for i := 1; i < len(bucket); i++ {
+			key := bucket[i]
+			j := i - 1
+			for j >= 0 && bucket[j] > key {
+				bucket[j+1] = bucket[j]
+				j--
+			}
+			bucket[j+1] = key
+		}
+	}
+
+	idx := 0
+	for _, bucket := range buckets {
+		for _, v := range bucket {
+			arr[idx] = v
+			idx++
+			steps = appendStep(steps, arr)
+		}
+	}
+
+	return steps
+}
+
 func CountingSort(arr []int) []SortStep {
 	var steps []SortStep
 	if len(arr) == 0 {
