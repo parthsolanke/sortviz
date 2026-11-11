@@ -1,8 +1,8 @@
-# ![Icon](./web/static/assets/favicon.ico) SortViz
+# ![Icon](./web/static/assets/favicon.ico) SortX
 
-SortViz is a Go web application that visualizes sorting algorithms one step at a time.
+SortX is a Go web application that visualizes sorting algorithms one step at a time.
 
-![SortViz Screenshot](./web/static/assets/app.png)
+![SortX Screenshot](./web/static/assets/app.png)
 
 ### Prerequisites
 - Go 1.20 or later
@@ -20,7 +20,7 @@ SortViz is a Go web application that visualizes sorting algorithms one step at a
     ```
 2. Navigate to the project directory:
     ```bash
-    cd SortViz
+    cd SortX
     ```
 3. Run the server:
     ```bash
