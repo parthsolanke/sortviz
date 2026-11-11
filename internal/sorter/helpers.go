@@ -96,6 +96,111 @@ func stoogeSortHelper(arr []int, low, high int, steps *[]SortStep) {
 	}
 }
 
+func insertionSortRange(arr []int, start, end int, steps *[]SortStep) {
+	for i := start + 1; i < end; i++ {
+		key := arr[i]
+		j := i - 1
+		for j >= start && arr[j] > key {
+			arr[j+1] = arr[j]
+			j--
+		}
+		arr[j+1] = key
+		*steps = appendStep(*steps, arr)
+	}
+}
+
+func timMerge(arr []int, left, mid, right int, steps *[]SortStep) {
+	leftPart := append([]int(nil), arr[left:mid]...)
+	rightPart := append([]int(nil), arr[mid:right]...)
+
+	i, j, k := 0, 0, left
+	for i < len(leftPart) && j < len(rightPart) {
+		if leftPart[i] <= rightPart[j] {
+			arr[k] = leftPart[i]
+			i++
+		} else {
+			arr[k] = rightPart[j]
+			j++
+		}
+		k++
+	}
+	for i < len(leftPart) {
+		arr[k] = leftPart[i]
+		i++
+		k++
+	}
+	for j < len(rightPart) {
+		arr[k] = rightPart[j]
+		j++
+		k++
+	}
+
+	*steps = appendStep(*steps, arr)
+}
+
+func bitonicSortHelper(arr []int, low, cnt int, dir bool, steps *[]SortStep) {
+	if cnt <= 1 {
+		return
+	}
+
+	k := cnt / 2
+	bitonicSortHelper(arr, low, k, !dir, steps)
+	bitonicSortHelper(arr, low+k, cnt-k, dir, steps)
+	bitonicMerge(arr, low, cnt, dir, steps)
+}
+
+func bitonicMerge(arr []int, low, cnt int, dir bool, steps *[]SortStep) {
+	if cnt <= 1 {
+		return
+	}
+
+	k := greatestPowerOfTwoLessThan(cnt)
+	for i := low; i < low+cnt-k; i++ {
+		if (arr[i] > arr[i+k]) == dir {
+			arr[i], arr[i+k] = arr[i+k], arr[i]
+			*steps = appendStep(*steps, arr)
+		}
+	}
+
+	bitonicMerge(arr, low, k, dir, steps)
+	bitonicMerge(arr, low+k, cnt-k, dir, steps)
+}
+
+func greatestPowerOfTwoLessThan(n int) int {
+	k := 1
+	for k < n {
+		k <<= 1
+	}
+	return k >> 1
+}
+
+type treeNode struct {
+	value int
+	left  *treeNode
+	right *treeNode
+}
+
+func insertTreeNode(root *treeNode, value int) *treeNode {
+	if root == nil {
+		return &treeNode{value: value}
+	}
+	if value < root.value {
+		root.left = insertTreeNode(root.left, value)
+	} else {
+		root.right = insertTreeNode(root.right, value)
+	}
+	return root
+}
+
+func traverseInOrder(node *treeNode, visit func(int)) {
+	if node == nil {
+		return
+	}
+	traverseInOrder(node.left, visit)
+	visit(node.value)
+	traverseInOrder(node.right, visit)
+}
+
 func heapify(arr []int, n, i int, steps *[]SortStep) {
 	largest := i
 	left := 2*i + 1

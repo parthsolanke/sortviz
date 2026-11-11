@@ -62,5 +62,25 @@
     "stooge": {
         "complexity": "Best & Average & Worst Case O(n^(log 3 / log 1.5))",
         "code": "void stoogeSort(vector<int>& arr, int low, int high) { {{NEWLINE}}    if (low >= high) return;{{NEWLINE}}    if (arr[low] > arr[high]) swap(arr[low], arr[high]);{{NEWLINE}}    if (high - low + 1 > 2) { {{NEWLINE}}        int third = (high - low + 1) / 3;{{NEWLINE}}        stoogeSort(arr, low, high - third);{{NEWLINE}}        stoogeSort(arr, low + third, high);{{NEWLINE}}        stoogeSort(arr, low, high - third);{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "tim": {
+        "complexity": "Best Case O(n), Average & Worst Case O(n log n)",
+        "code": "void insertionSort(vector<int>& arr, int left, int right) { {{NEWLINE}}    for (int i = left + 1; i <= right; i++) { {{NEWLINE}}        int key = arr[i];{{NEWLINE}}        int j = i - 1;{{NEWLINE}}        while (j >= left && arr[j] > key) { {{NEWLINE}}            arr[j + 1] = arr[j];{{NEWLINE}}            j--;{{NEWLINE}}        }{{NEWLINE}}        arr[j + 1] = key;{{NEWLINE}}    }{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void timSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    const int RUN = 4;{{NEWLINE}}    for (int i = 0; i < n; i += RUN){{NEWLINE}}        insertionSort(arr, i, min(i + RUN - 1, n - 1));{{NEWLINE}}    for (int size = RUN; size < n; size *= 2) { {{NEWLINE}}        for (int left = 0; left < n; left += 2 * size) { {{NEWLINE}}            int mid = min(left + size - 1, n - 1);{{NEWLINE}}            int right = min(left + 2 * size - 1, n - 1);{{NEWLINE}}            if (mid < right) merge(arr, left, mid, right);{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "pigeonhole": {
+        "complexity": "Best & Average & Worst Case O(n + range)",
+        "code": "void pigeonholeSort(vector<int>& arr) { {{NEWLINE}}    if (arr.empty()) return;{{NEWLINE}}    int minVal = *min_element(arr.begin(), arr.end());{{NEWLINE}}    int maxVal = *max_element(arr.begin(), arr.end());{{NEWLINE}}    int range = maxVal - minVal + 1;{{NEWLINE}}    vector<int> holes(range, 0);{{NEWLINE}}    for (int v : arr) holes[v - minVal]++;{{NEWLINE}}    int idx = 0;{{NEWLINE}}    for (int i = 0; i < range; i++) { {{NEWLINE}}        while (holes[i]-- > 0) arr[idx++] = i + minVal;{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "cycle": {
+        "complexity": "Best & Average & Worst Case O(n^2)",
+        "code": "void cycleSort(vector<int>& arr) { {{NEWLINE}}    int n = arr.size();{{NEWLINE}}    for (int start = 0; start <= n - 2; start++) { {{NEWLINE}}        int item = arr[start];{{NEWLINE}}        int pos = start;{{NEWLINE}}        for (int i = start + 1; i < n; i++){{NEWLINE}}            if (arr[i] < item) pos++;{{NEWLINE}}        if (pos == start) continue;{{NEWLINE}}        while (item == arr[pos]) pos++;{{NEWLINE}}        swap(item, arr[pos]);{{NEWLINE}}        while (pos != start) { {{NEWLINE}}            pos = start;{{NEWLINE}}            for (int i = start + 1; i < n; i++){{NEWLINE}}                if (arr[i] < item) pos++;{{NEWLINE}}            while (item == arr[pos]) pos++;{{NEWLINE}}            swap(item, arr[pos]);{{NEWLINE}}        }{{NEWLINE}}    }{{NEWLINE}}}"
+    },
+    "bitonic": {
+        "complexity": "Best & Average & Worst Case O(n log^2 n)",
+        "code": "void bitonicMerge(vector<int>& arr, int low, int cnt, bool dir) { {{NEWLINE}}    if (cnt <= 1) return;{{NEWLINE}}    int k = 1;{{NEWLINE}}    while (k < cnt) k <<= 1;{{NEWLINE}}    k >>= 1;{{NEWLINE}}    for (int i = low; i < low + cnt - k; i++) { {{NEWLINE}}        if ((arr[i] > arr[i + k]) == dir) swap(arr[i], arr[i + k]);{{NEWLINE}}    }{{NEWLINE}}    bitonicMerge(arr, low, k, dir);{{NEWLINE}}    bitonicMerge(arr, low + k, cnt - k, dir);{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void bitonicSort(vector<int>& arr, int low, int cnt, bool dir) { {{NEWLINE}}    if (cnt <= 1) return;{{NEWLINE}}    int k = cnt / 2;{{NEWLINE}}    bitonicSort(arr, low, k, !dir);{{NEWLINE}}    bitonicSort(arr, low + k, cnt - k, dir);{{NEWLINE}}    bitonicMerge(arr, low, cnt, dir);{{NEWLINE}}}"
+    },
+    "tree": {
+        "complexity": "Best & Average Case O(n log n), Worst Case O(n^2)",
+        "code": "struct Node { {{NEWLINE}}    int value;{{NEWLINE}}    Node* left;{{NEWLINE}}    Node* right;{{NEWLINE}}    Node(int v) : value(v), left(nullptr), right(nullptr) {}{{NEWLINE}}};{{NEWLINE}}{{NEWLINE}}Node* insert(Node* root, int value) { {{NEWLINE}}    if (!root) return new Node(value);{{NEWLINE}}    if (value < root->value) root->left = insert(root->left, value);{{NEWLINE}}    else root->right = insert(root->right, value);{{NEWLINE}}    return root;{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void inOrder(Node* root, vector<int>& arr, int& idx) { {{NEWLINE}}    if (!root) return;{{NEWLINE}}    inOrder(root->left, arr, idx);{{NEWLINE}}    arr[idx++] = root->value;{{NEWLINE}}    inOrder(root->right, arr, idx);{{NEWLINE}}}{{NEWLINE}}{{NEWLINE}}void treeSort(vector<int>& arr) { {{NEWLINE}}    Node* root = nullptr;{{NEWLINE}}    for (int v : arr) root = insert(root, v);{{NEWLINE}}    int idx = 0;{{NEWLINE}}    inOrder(root, arr, idx);{{NEWLINE}}}"
     }
 }

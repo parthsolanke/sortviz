@@ -60,6 +60,16 @@ func SortHandler(w http.ResponseWriter, r *http.Request) {
 		steps = sorter.PancakeSort(data.Array)
 	case "stooge":
 		steps = sorter.StoogeSort(data.Array)
+	case "tim":
+		steps = sorter.TimSort(data.Array)
+	case "pigeonhole":
+		steps = sorter.PigeonholeSort(data.Array)
+	case "cycle":
+		steps = sorter.CycleSort(data.Array)
+	case "bitonic":
+		steps = sorter.BitonicSort(data.Array)
+	case "tree":
+		steps = sorter.TreeSort(data.Array)
 	default:
 		http.Error(w, "Unknown sorting algorithm", http.StatusBadRequest)
 		return

@@ -409,3 +409,133 @@ func CountingSort(arr []int) []SortStep {
 
 	return steps
 }
+
+func TimSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	const run = 4
+
+	for start := 0; start < n; start += run {
+		end := start + run
+		if end > n {
+			end = n
+		}
+		insertionSortRange(arr, start, end, &steps)
+	}
+
+	for size := run; size < n; size *= 2 {
+		for left := 0; left < n; left += 2 * size {
+			mid := left + size
+			if mid > n {
+				mid = n
+			}
+			right := left + 2*size
+			if right > n {
+				right = n
+			}
+			if mid < right {
+				timMerge(arr, left, mid, right, &steps)
+			}
+		}
+	}
+
+	return steps
+}
+
+func PigeonholeSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+	if n == 0 {
+		return steps
+	}
+
+	minVal, maxVal := arr[0], arr[0]
+	for _, v := range arr {
+		if v < minVal {
+			minVal = v
+		}
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
+	holes := make([]int, maxVal-minVal+1)
+	for _, v := range arr {
+		holes[v-minVal]++
+	}
+
+	idx := 0
+	for i, count := range holes {
+		for ; count > 0; count-- {
+			arr[idx] = i + minVal
+			idx++
+			steps = appendStep(steps, arr)
+		}
+	}
+
+	return steps
+}
+
+func CycleSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for cycleStart := 0; cycleStart <= n-2; cycleStart++ {
+		item := arr[cycleStart]
+		pos := cycleStart
+		for i := cycleStart + 1; i < n; i++ {
+			if arr[i] < item {
+				pos++
+			}
+		}
+
+		if pos == cycleStart {
+			continue
+		}
+
+		for item == arr[pos] {
+			pos++
+		}
+		arr[pos], item = item, arr[pos]
+		steps = appendStep(steps, arr)
+
+		for pos != cycleStart {
+			pos = cycleStart
+			for i := cycleStart + 1; i < n; i++ {
+				if arr[i] < item {
+					pos++
+				}
+			}
+			for item == arr[pos] {
+				pos++
+			}
+			arr[pos], item = item, arr[pos]
+			steps = appendStep(steps, arr)
+		}
+	}
+
+	return steps
+}
+
+func BitonicSort(arr []int) []SortStep {
+	var steps []SortStep
+	bitonicSortHelper(arr, 0, len(arr), true, &steps)
+	return steps
+}
+
+func TreeSort(arr []int) []SortStep {
+	var steps []SortStep
+	var root *treeNode
+	for _, v := range arr {
+		root = insertTreeNode(root, v)
+	}
+
+	idx := 0
+	traverseInOrder(root, func(v int) {
+		arr[idx] = v
+		idx++
+		steps = appendStep(steps, arr)
+	})
+
+	return steps
+}
