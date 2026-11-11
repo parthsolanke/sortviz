@@ -78,6 +78,24 @@ func quickSortHelper(arr []int, low, high int, steps *[]SortStep) {
 	}
 }
 
+func stoogeSortHelper(arr []int, low, high int, steps *[]SortStep) {
+	if low >= high {
+		return
+	}
+
+	if arr[low] > arr[high] {
+		arr[low], arr[high] = arr[high], arr[low]
+		*steps = appendStep(*steps, arr)
+	}
+
+	if high-low+1 > 2 {
+		third := (high - low + 1) / 3
+		stoogeSortHelper(arr, low, high-third, steps)
+		stoogeSortHelper(arr, low+third, high, steps)
+		stoogeSortHelper(arr, low, high-third, steps)
+	}
+}
+
 func heapify(arr []int, n, i int, steps *[]SortStep) {
 	largest := i
 	left := 2*i + 1

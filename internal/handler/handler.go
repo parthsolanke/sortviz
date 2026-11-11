@@ -56,6 +56,10 @@ func SortHandler(w http.ResponseWriter, r *http.Request) {
 		steps = sorter.RadixSort(data.Array)
 	case "bucket":
 		steps = sorter.BucketSort(data.Array)
+	case "pancake":
+		steps = sorter.PancakeSort(data.Array)
+	case "stooge":
+		steps = sorter.StoogeSort(data.Array)
 	default:
 		http.Error(w, "Unknown sorting algorithm", http.StatusBadRequest)
 		return

@@ -336,6 +336,46 @@ func BucketSort(arr []int) []SortStep {
 	return steps
 }
 
+func PancakeSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for size := n; size > 1; size-- {
+		maxIdx := 0
+		for i := 1; i < size; i++ {
+			if arr[i] > arr[maxIdx] {
+				maxIdx = i
+			}
+		}
+
+		if maxIdx == size-1 {
+			continue
+		}
+
+		if maxIdx != 0 {
+			flipPrefix(arr, maxIdx)
+			steps = appendStep(steps, arr)
+		}
+
+		flipPrefix(arr, size-1)
+		steps = appendStep(steps, arr)
+	}
+
+	return steps
+}
+
+func flipPrefix(arr []int, end int) {
+	for i, j := 0, end; i < j; i, j = i+1, j-1 {
+		arr[i], arr[j] = arr[j], arr[i]
+	}
+}
+
+func StoogeSort(arr []int) []SortStep {
+	var steps []SortStep
+	stoogeSortHelper(arr, 0, len(arr)-1, &steps)
+	return steps
+}
+
 func CountingSort(arr []int) []SortStep {
 	var steps []SortStep
 	if len(arr) == 0 {
