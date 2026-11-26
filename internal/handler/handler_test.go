@@ -21,6 +21,7 @@ func TestSortHandler(t *testing.T) {
 		{"InsertionSort", []int{5, 3, 8, 4, 2}, "insertion", []int{2, 3, 4, 5, 8}},
 		{"SelectionSort", []int{5, 3, 8, 4, 2}, "selection", []int{2, 3, 4, 5, 8}},
 		{"MergeSort", []int{5, 3, 8, 4, 2}, "merge", []int{2, 3, 4, 5, 8}},
+		{"HeapSort", []int{5, 3, 8, 4, 2}, "heap", []int{2, 3, 4, 5, 8}},
 	}
 
 	for _, tt := range tests {

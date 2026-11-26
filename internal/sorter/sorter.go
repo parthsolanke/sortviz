@@ -78,3 +78,20 @@ func QuickSort(arr []int) []SortStep {
 	quickSortHelper(arr, 0, len(arr)-1, &steps)
 	return steps
 }
+
+func HeapSort(arr []int) []SortStep {
+	var steps []SortStep
+	n := len(arr)
+
+	for i := n/2 - 1; i >= 0; i-- {
+		heapify(arr, n, i, &steps)
+	}
+
+	for i := n - 1; i > 0; i-- {
+		arr[0], arr[i] = arr[i], arr[0]
+		steps = appendStep(steps, arr)
+		heapify(arr, i, 0, &steps)
+	}
+
+	return steps
+}
