@@ -9,6 +9,13 @@ SortViz is an overkill web application that visualizes sorting algorithms. Built
 - Built with Go.
 - Extendable with multiple sorting algorithms.
 
+### Supported Algorithms
+- Bubble Sort
+- Selection Sort
+- Insertion Sort
+- Merge Sort
+- Quick Sort
+
 ### Prerequisites
 - Go 1.20 or later
 - Make (optional, for using the Makefile)
